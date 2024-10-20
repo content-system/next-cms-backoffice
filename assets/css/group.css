@@ -1,19 +1,19 @@
 .view-container.menu {
-  height: calc(100vh - 44px);
+  height: calc(100vh - 52px);
 }
 .view-container.menu section.row {
   height: unset;
 }
 .row.group {
   overflow-y: auto;
-  max-height: calc(100vh - 44px - 44px);
+  max-height: calc(100vh - 52px - 44px);
 }
 @media screen and (min-width: 769px) {
   .top-menu .view-container.menu {
-    height: calc(100vh - 44px - 46px);
+    height: calc(100vh - 52px - 46px);
   }
   .top-menu .row.group {
-    max-height: calc(100vh - 44px - 44px - 46px);
+    max-height: calc(100vh - 52px - 44px - 46px);
   }
   .classic.top-menu .view-container.menu {
     height: unset;

@@ -159,9 +159,9 @@ export default function RolesForm() {
                     <li key={i} className="col s12 m6 l4 xl3" onClick={(e) => edit(e, item.roleId)}>
                       <section>
                         <div>
-                          <h3 className={item.status === "I" ? "inactive" : ""}>
+                          <h4 className={item.status === "I" ? "inactive" : ""}>
                             <a>{item.roleName}</a>
-                          </h3>
+                          </h4>
                           <p>{item.remark}</p>
                         </div>
                         <button className="btn-detail" />

@@ -1,11 +1,12 @@
 @import "./reset.css";
-@import url("http://fonts.cdnfonts.com/css/roboto");
+@import "../fonts/Roboto/font.css";
 @import "../fonts/material-icon/css/material-icons.css";
 @import "./checkbox.css";
 @import "./radio.css";
 @import "./grid.css";
 @import "./alert.css";
 @import "./loader.css";
+@import "./page.css";
 @import "./main.css";
 @import "./modal.css";
 @import "./multi-select.css";

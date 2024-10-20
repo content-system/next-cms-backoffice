@@ -191,9 +191,9 @@ export default function UsersForm() {
                           className="round-border"
                         />
                         <div>
-                          <h3 className={user.status === "I" ? "inactive" : ""}>
+                          <h4 className={user.status === "I" ? "inactive" : ""}>
                             <a>{user.displayName}</a>
-                          </h3>
+                          </h4>
                           <p>{user.email}</p>
                         </div>
                         <button className="btn-detail" />

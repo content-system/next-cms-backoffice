@@ -254,8 +254,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <section className="quick-nav">
                   {/*<button type='button' className='notifications'><i className='material-icons'>notifications</i></button>
                 <button type='button' className='mail'><i className='material-icons'>mail</i></button>*/}
-                  {global.location?.pathname !== "/welcome" && (
-                    <Link href="welcome">
+                  {global.location?.pathname !== "/home" && (
+                    <Link href="/home">
                       <i className="material-icons">home</i>
                     </Link>
                   )}
