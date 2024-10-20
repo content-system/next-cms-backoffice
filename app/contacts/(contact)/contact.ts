@@ -18,6 +18,9 @@ export interface Contact extends Tracking {
   email: string
   phone: string
   message: string
+  submittedAt: Date
+  contactedBy: string
+  contactedAt: Date
 }
 export interface ContactService extends Service<Contact, string, ContactFilter> {}
 

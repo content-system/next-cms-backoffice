@@ -1,6 +1,6 @@
 "use client"
 
-import { isSuccessful } from "next-hook-core"
+import { datetimeToString, isSuccessful } from "next-hook-core"
 import { useParams, useRouter } from "next/navigation"
 import { Result } from "onecore"
 import { useEffect, useRef, useState } from "react"
@@ -181,6 +181,53 @@ export default function ContactUs() {
               }}
               onBlur={phoneOnBlur}
               required={true}
+              maxLength={17}
+              placeholder={resource.phone}
+            />
+          </label>
+          <label className="col s12 m6">
+            {resource.phone}
+            <input
+              type="datetime-local"
+              id="submittedAt"
+              name="submittedAt"
+              value={datetimeToString(contact.submittedAt)}
+              onChange={(e) => {
+                contact.submittedAt = e.target.value as any
+                setState({ contact })
+              }}
+              maxLength={17}
+              placeholder={resource.phone}
+            />
+          </label>
+          <label className="col s12 m6">
+            {resource.company}
+            <input
+              type="text"
+              id="contactedBy"
+              name="contactedBy"
+              value={contact.contactedBy || ""}
+              onChange={(e) => {
+                contact.contactedBy = e.target.value
+                setState({ contact })
+              }}
+              onBlur={requiredOnBlur}
+              maxLength={100}
+              required={true}
+              placeholder={resource.company}
+            />
+          </label>
+          <label className="col s12 m6">
+            {resource.phone}
+            <input
+              type="datetime-local"
+              id="contactedAt"
+              name="contactedAt"
+              value={datetimeToString(contact.contactedAt)}
+              onChange={(e) => {
+                contact.contactedAt = e.target.value as any
+                setState({ contact })
+              }}
               maxLength={17}
               placeholder={resource.phone}
             />
