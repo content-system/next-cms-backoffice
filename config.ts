@@ -12,6 +12,7 @@ export const config = {
 
   article_url: "http://localhost:8083/articles",
   job_url: "http://localhost:8083/jobs",
+  contact_url: "http://localhost:8083/contacts",
 }
 
 export const env = {
