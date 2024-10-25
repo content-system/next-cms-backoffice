@@ -1,31 +1,34 @@
-import { Attributes, Filter, Service, Tracking } from "onecore"
+import { Attributes, Filter, Service, TimeRange } from "onecore"
 
-export interface Job extends Tracking {
+export interface Job {
   id: string
-  title: string
-  description: string
+  title?: string
+  description?: string
+  requirements?: string
+  benefit?: string
+  publishedAt?: Date
+  expiredAt?: Date
   skill?: string[]
-  publishedAt: Date
-  expiredAt: Date | null
-  quantity: number
-  applicantCount: number
-  requirements: string
-  benefit: string
-  companyId: string
+  location?: string
+  quantity?: number
+  applicantCount?: number
+  companyId?: string
   status: string
 }
 export interface JobFilter extends Filter {
   id?: string
   title?: string
   description?: string
-  skill?: string[]
-  publishedAt?: Date
-  expiredAt?: Date
-  quantity?: number
-  applicantCount?: number
   requirements?: string
   benefit?: string
+  publishedAt?: TimeRange
+  expiredAt?: TimeRange
+  skill?: string[]
+  location?: string
+  quantity?: number
+  applicantCount?: number
   companyId?: string
+  status?: string
 }
 export interface JobService extends Service<Job, string, JobFilter> {
   // getJobs(id: string): Promise<Job[]>;
@@ -42,29 +45,32 @@ export const jobModel: Attributes = {
   },
   description: {
     length: 1000,
-    q: true,
-  },
-  benefit: {
-    length: 1000,
-    q: true,
   },
   requirements: {
     length: 1000,
-    q: true,
+  },
+  benefit: {
+    length: 1000,
   },
   publishedAt: {
+    column: "published_at",
     type: "datetime",
   },
   expiredAt: {
+    column: "expired_at",
     type: "datetime",
   },
   skills: {
     type: "primitives",
   },
+  location: {
+    length: 120,
+  },
   quantity: {
-    type: "number",
+    type: "integer",
   },
   applicantCount: {
-    type: "number",
+    column: "applicant_count",
+    type: "integer",
   },
 }

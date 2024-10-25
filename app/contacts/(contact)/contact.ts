@@ -1,15 +1,6 @@
-import { Attributes, Filter, Service, Tracking } from "onecore"
+import { Attributes, Filter, Repository, Service, TimeRange } from "onecore"
 
-export interface ContactFilter extends Filter {
-  id?: string
-  name?: string
-  country?: string
-  company?: string
-  jobTitle?: string
-  email?: string
-  phone?: string
-}
-export interface Contact extends Tracking {
+export interface Contact {
   id: string
   name: string
   country: string
@@ -18,10 +9,22 @@ export interface Contact extends Tracking {
   email: string
   phone: string
   message: string
-  submittedAt: Date
+  submittedAt?: Date
   contactedBy: string
-  contactedAt: Date
+  contactedAt?: Date
 }
+export interface ContactFilter extends Filter {
+  id?: string
+  name?: string
+  country?: string
+  company?: string
+  jobTitle?: string
+  email?: string
+  phone?: string
+  submittedAt?: TimeRange
+}
+
+export interface ContactRepository extends Repository<Contact, string> {}
 export interface ContactService extends Service<Contact, string, ContactFilter> {}
 
 export const contactModel: Attributes = {
@@ -31,27 +34,40 @@ export const contactModel: Attributes = {
     key: true,
   },
   name: {
-    length: 100,
+    length: 120,
     required: true,
     q: true,
   },
-  title: {
-    length: 20,
+  country: {
+    length: 120,
+    required: true,
+  },
+  company: {
+    length: 120,
+    required: true,
+  },
+  jobTitle: {
+    column: "job_title",
+    length: 120,
+  },
+  email: {
+    format: "email",
+    length: 120,
     q: true,
   },
   phone: {
     format: "phone",
-    length: 14,
+    length: 20,
   },
-  email: {
-    length: 100,
-    q: true,
+  message: {
+    length: 1000,
+    required: true,
   },
   submittedAt: {
     type: "datetime",
   },
   contactedBy: {
-    length: 40,
+    length: 120,
   },
   contactedAt: {
     type: "datetime",

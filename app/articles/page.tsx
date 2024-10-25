@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { Item } from "onecore"
 import * as React from "react"
 import Pagination from "reactx-paging"
-import { formatDateTime } from "ui-plus"
+import { addDays, datetimeToString, formatDateTime } from "ui-plus"
 import { getDateFormat, inputSearch } from "uione"
 import { Article, ArticleFilter, getArticleService } from "./service"
 
@@ -17,6 +17,10 @@ const articleFilter: ArticleFilter = {
   q: "",
   title: "",
   description: "",
+  publishedAt: {
+    max: new Date(),
+    min: addDays(new Date(), -60),
+  },
 }
 const articleSearch: ArticleSearch = {
   statusList: [],
@@ -73,6 +77,32 @@ export default function Articles() {
               onChange={pageChanged}
             />
           </section>
+          <section className="row search-group inline" hidden={component.hideFilter}>
+            <label className="col s12 m6 l4">
+              {resource.published_at_from}
+              <input
+                type="datetime-local"
+                step=".010"
+                id="publishedAt_min"
+                name="publishedAt_min"
+                data-field="publishedAt.min"
+                value={datetimeToString(filter.publishedAt?.min)}
+                onChange={updateState}
+              />
+            </label>
+            <label className="col s12 m6 l4">
+              {resource.published_at_to}
+              <input
+                type="datetime-local"
+                step=".010"
+                id="publishedAt_max"
+                name="publishedAt_max"
+                data-field="publishedAt.max"
+                value={datetimeToString(filter.publishedAt?.max)}
+                onChange={updateState}
+              />
+            </label>
+          </section>
         </form>
         <form className="list-result">
           {component.view === "table" && (
@@ -91,7 +121,7 @@ export default function Articles() {
                         {resource.title}
                       </button>
                     </th>
-                    <th data-field="publishedAt">
+                    <th data-field="publishedAt" className="datetime">
                       <button type="button" id="sortPublishedAt" onClick={sort}>
                         {resource.published_at}
                       </button>
@@ -129,15 +159,12 @@ export default function Articles() {
                 state.list.length > 0 &&
                 state.list.map((item, i) => {
                   return (
-                    <li key={i} className="col s12 m6 l4 xl3" onClick={(e) => edit(e, item.id)}>
+                    <li key={i} className="col s12 m6 l4 xl3 card" onClick={(e) => edit(e, item.id)}>
                       <section>
-                        <div>
-                          <h4>
-                            <a>{item.title}</a>
-                          </h4>
-                          <p>{item.description}</p>
-                        </div>
-                        <button className="btn-detail" />
+                        <div className="cover" style={{ backgroundImage: `url('${item.thumbnail}')` }}></div>
+                        <Link href={`${path}/${item.id}`}>{item.title}</Link>
+                        <p>{formatDateTime(item.publishedAt, dateFormat)}</p>
+                        <p>{item.description}</p>
                       </section>
                     </li>
                   )

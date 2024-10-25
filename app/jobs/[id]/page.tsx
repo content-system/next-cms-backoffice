@@ -56,7 +56,7 @@ export default function JobForm() {
               value={job.id || ""}
               readOnly={!flag.newMode}
               onChange={updateState}
-              maxLength={20}
+              maxLength={40}
               required={true}
               placeholder={resource.id}
             />
@@ -70,11 +70,27 @@ export default function JobForm() {
               value={job.title || ""}
               onChange={updateState}
               onBlur={requiredOnBlur}
-              maxLength={40}
+              maxLength={300}
               required={true}
               placeholder={resource.display_name}
             />
           </label>
+          {/*
+          <label className="col s12 m6">
+            {resource.quantity}
+            <input
+              type="text"
+              id="quantity"
+              name="quantity"
+              value={job.quantity || ""}
+              onChange={updateState}
+              onBlur={requiredOnBlur}
+              min={1}
+              maxLength={300}
+              required={true}
+              placeholder={resource.quantity}
+            />
+          </label> */}
           <label className="col s12 m6 flying">
             {resource.description}
             <input
@@ -85,7 +101,7 @@ export default function JobForm() {
               value={job.description || ""}
               onChange={updateState}
               onBlur={requiredOnBlur}
-              maxLength={100}
+              maxLength={2000}
               placeholder={resource.description}
             />
           </label>
@@ -98,7 +114,7 @@ export default function JobForm() {
               value={job.requirements || ""}
               onChange={updateState}
               onBlur={requiredOnBlur}
-              maxLength={40}
+              maxLength={2000}
               required={true}
               placeholder={resource.requirements}
             />

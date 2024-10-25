@@ -6,7 +6,8 @@ import { usePathname, useRouter } from "next/navigation"
 import { Item } from "onecore"
 import React, { useMemo } from "react"
 import Pagination from "reactx-paging"
-import { inputSearch } from "uione"
+import { formatDateTime } from "ui-plus"
+import { getDateFormat, inputSearch } from "uione"
 import { Contact, ContactFilter, getContactService } from "./service"
 
 interface ContactSearch extends SearchComponentState<Contact, ContactFilter> {
@@ -25,6 +26,7 @@ const initialState: ContactSearch = {
   filter: contactFilter,
 }
 export default function ContactsForm() {
+  const dateFormat = getDateFormat()
   const router = useRouter()
   const pathname = usePathname()
   const path = useMemo(() => {
@@ -80,11 +82,11 @@ export default function ContactsForm() {
             />
           </section>
           <section className="row search-group inline" hidden={component.hideFilter}>
-            <label className="col s12 m4 l4">
+            <label className="col s12 m6">
               {resource.email}
               <input type="text" id="email" name="email" value={filter.email || ""} onChange={updateState} maxLength={255} placeholder={resource.email} />
             </label>
-            <label className="col s12 m4 l4">
+            <label className="col s12 m6">
               {resource.phone}
               <input type="text" id="phone" name="phone" value={filter.phone || ""} onChange={updateState} maxLength={255} placeholder={resource.phone} />
             </label>
@@ -117,6 +119,11 @@ export default function ContactsForm() {
                         {resource.country}
                       </button>
                     </th>
+                    <th data-field="submittedAt">
+                      <button type="button" id="sortSubmittedAt" onClick={sort}>
+                        {resource.submitted_at}
+                      </button>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -132,6 +139,7 @@ export default function ContactsForm() {
                           <td>{contact.email}</td>
                           <td>{contact.phone}</td>
                           <td>{contact.country}</td>
+                          <td>{formatDateTime(contact.submittedAt, dateFormat)}</td>
                         </tr>
                       )
                     })}
@@ -149,11 +157,10 @@ export default function ContactsForm() {
                       <section>
                         <div>
                           <h4>
-                            <a>{item.name}</a>
+                            <Link href={`${path}/${item.id}`}>{item.name}</Link>
                           </h4>
                           <p>{item.email}</p>
                         </div>
-                        <button className="btn-detail" />
                       </section>
                     </li>
                   )

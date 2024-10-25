@@ -165,7 +165,6 @@ export const vi = {
   female: "Female",
   name: "Name",
 
-  contacts: "Contacts",
   fullname: "Full Name",
   email: "Email",
   phone: "Telephone",
@@ -199,18 +198,26 @@ export const vi = {
   start_time: "Start Time",
   end_time: "End Time",
 
-  private_key: "Private Key",
   action: "Action",
   resource: "Resource",
   timestamp: "Timestamp",
   ip: "IP",
 
+  articles: "Articles",
+  jobs: "Jobs",
   id: "Id",
   title: "Title",
   content: "Content",
   published_at: "Published At",
+  published_at_from: "Published At From",
+  published_at_to: "Published At To",
   company: "Company",
   job_title: "Job Title",
   requirements: "Requirements",
+
+  contacts: "Contacts",
+  submitted_at: "Submitted At",
+  contacted_by: "Contacted By",
+  contacted_at: "Contacted At",
   message: "Message",
 }

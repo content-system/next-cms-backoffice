@@ -1,15 +1,12 @@
 "use client"
 
 import { createModel, EditComponentParam, useEdit } from "next-hook-core"
-import { Item } from "onecore"
 import * as React from "react"
 import { inputEdit, requiredOnBlur, Status } from "uione"
 import { Article, getArticleService } from "../service"
 
 interface InternalState {
   article: Article
-  titleList: Item[]
-  positionList: Item[]
 }
 
 const createArticle = (): Article => {
@@ -19,8 +16,6 @@ const createArticle = (): Article => {
 
 const initialState: InternalState = {
   article: {} as Article,
-  titleList: [],
-  positionList: [],
 }
 
 const param: EditComponentParam<Article, string, InternalState> = {
@@ -29,7 +24,7 @@ const param: EditComponentParam<Article, string, InternalState> = {
 
 export default function ArticleForm() {
   const refForm = React.useRef()
-  const { resource, state, setState, updateState, flag, save, updatePhoneState, back } = useEdit<Article, string, InternalState>(
+  const { resource, state, updateState, flag, save, back } = useEdit<Article, string, InternalState>(
     refForm,
     initialState,
     getArticleService(),
@@ -56,7 +51,7 @@ export default function ArticleForm() {
               value={article.id || ""}
               readOnly={!flag.newMode}
               onChange={updateState}
-              maxLength={20}
+              maxLength={40}
               required={true}
               placeholder={resource.id}
             />
@@ -70,7 +65,7 @@ export default function ArticleForm() {
               value={article.title || ""}
               onChange={updateState}
               onBlur={requiredOnBlur}
-              maxLength={40}
+              maxLength={255}
               required={true}
               placeholder={resource.display_name}
             />
@@ -85,7 +80,7 @@ export default function ArticleForm() {
               value={article.description || ""}
               onChange={updateState}
               onBlur={requiredOnBlur}
-              maxLength={100}
+              maxLength={1000}
               placeholder={resource.description}
             />
           </label>
@@ -98,7 +93,7 @@ export default function ArticleForm() {
               value={article.content || ""}
               onChange={updateState}
               onBlur={requiredOnBlur}
-              maxLength={40}
+              maxLength={5000}
               required={true}
               placeholder={resource.content}
             />

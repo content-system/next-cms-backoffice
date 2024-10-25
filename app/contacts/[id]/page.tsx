@@ -6,8 +6,9 @@ import { Result } from "onecore"
 import { useEffect, useRef, useState } from "react"
 import { alertError, alertSuccess, confirm } from "ui-alert"
 import { hideLoading, showLoading } from "ui-loading"
-import { emailOnBlur, formatPhone, phoneOnBlur, registerEvents, requiredOnBlur, showFormError, validateForm } from "ui-plus"
+import { createDate, emailOnBlur, formatPhone, phoneOnBlur, registerEvents, removePhoneFormat, requiredOnBlur, showFormError, validateForm } from "ui-plus"
 import { getLocale, handleError, initForm, useResource } from "uione"
+import { isValidDate } from "validation-core"
 import { Contact } from "../(contact)"
 import { getContactService } from "../service"
 
@@ -176,7 +177,7 @@ export default function ContactUs() {
               name="phone"
               value={formatPhone(contact.phone) || ""}
               onChange={(e) => {
-                contact.phone = e.target.value
+                contact.phone = removePhoneFormat(e.target.value)
                 setState({ contact })
               }}
               onBlur={phoneOnBlur}
@@ -186,22 +187,25 @@ export default function ContactUs() {
             />
           </label>
           <label className="col s12 m6">
-            {resource.phone}
+            {resource.submitted_at}
             <input
               type="datetime-local"
               id="submittedAt"
               name="submittedAt"
               value={datetimeToString(contact.submittedAt)}
               onChange={(e) => {
-                contact.submittedAt = e.target.value as any
+                const date = new Date(e.target.value)
+                contact.submittedAt = isValidDate(date) ? date : undefined
                 setState({ contact })
               }}
-              maxLength={17}
-              placeholder={resource.phone}
+              onBlur={requiredOnBlur}
+              maxLength={19}
+              required={true}
+              placeholder={resource.submitted_at}
             />
           </label>
           <label className="col s12 m6">
-            {resource.company}
+            {resource.contacted_by}
             <input
               type="text"
               id="contactedBy"
@@ -211,25 +215,23 @@ export default function ContactUs() {
                 contact.contactedBy = e.target.value
                 setState({ contact })
               }}
-              onBlur={requiredOnBlur}
               maxLength={100}
-              required={true}
-              placeholder={resource.company}
+              placeholder={resource.contacted_by}
             />
           </label>
           <label className="col s12 m6">
-            {resource.phone}
+            {resource.contacted_at}
             <input
               type="datetime-local"
               id="contactedAt"
               name="contactedAt"
               value={datetimeToString(contact.contactedAt)}
               onChange={(e) => {
-                contact.contactedAt = e.target.value as any
+                contact.contactedAt = createDate(e.target.value)
                 setState({ contact })
               }}
-              maxLength={17}
-              placeholder={resource.phone}
+              maxLength={19}
+              placeholder={resource.contacted_at}
             />
           </label>
           <label className="col s12 m12">

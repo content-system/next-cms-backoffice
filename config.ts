@@ -10,9 +10,9 @@ export const config = {
   privilege_url: "http://localhost:8083/privileges",
   audit_log_url: "http://localhost:8083/audit-logs",
 
-  article_url: "http://localhost:8083/articles",
-  job_url: "http://localhost:8083/jobs",
-  contact_url: "http://localhost:8083/contacts",
+  article_url: "http://localhost:8080/articles",
+  job_url: "http://localhost:8080/jobs",
+  contact_url: "http://localhost:8080/contacts",
 }
 
 export const env = {

@@ -1,3 +1,5 @@
+"use client"
+
 import logo from "@assets/images/logo.png"
 import { OnClick, useMessage, useUpdate } from "next-hook-core"
 import Link from "next/link"
