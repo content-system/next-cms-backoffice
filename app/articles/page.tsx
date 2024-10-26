@@ -78,7 +78,7 @@ export default function Articles() {
             />
           </section>
           <section className="row search-group inline" hidden={component.hideFilter}>
-            <label className="col s12 m6 l4">
+            <label className="col s12 m6">
               {resource.published_at_from}
               <input
                 type="datetime-local"
@@ -90,7 +90,7 @@ export default function Articles() {
                 onChange={updateState}
               />
             </label>
-            <label className="col s12 m6 l4">
+            <label className="col s12 m6">
               {resource.published_at_to}
               <input
                 type="datetime-local"
